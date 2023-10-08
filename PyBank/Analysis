@@ -45,5 +45,10 @@ with open(PyBank_csv) as csvfile:
 
 with open("PyBank.txt", "w") as output: 
     Profit_Changes=(f'Financial Analysis\n'
-                    f'----------------------------\n')
+                    f'----------------------------\n'
+                    f'Total Months:' +  str(row_count) + "\n"
+                    f'Total: $'+  str(total_profit_loss) + "\n"
+                    f'Average Change: $' + str(round(total_change/(row_count-1),2)) + "\n"
+                    f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})\n'
+                    f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})\n')
     output.write(Profit_Changes)
