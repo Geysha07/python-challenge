@@ -5,17 +5,40 @@ PyBank_csv=os.path.join('Resources', 'budget_data.csv')
 print(PyBank_csv)
 
 row_count=0
-
+total_profit_loss=0
+total_change=0
+previous=0
+greatest_increase=0
+greatest_decrease=0
 
 with open(PyBank_csv) as csvfile:
     csvreader=csv.reader(csvfile,delimiter=',')
     print(csvreader)
 
     header = next(csvreader)
-    print(f"Header: {header}")
+    print(f"Header: {header}") 
+    
+
+    print('Financial Analysis')
+    print('----------------------------')
+    
     for row in csvreader:
-        print('Financial Analysis')
-        print('----------------------------')
+        if csvreader.line_num==2:
+            previous=int(row[1])
+        total_profit_loss=int(row[1])+total_profit_loss
         row_count+=1
-        print('Total Months:', row_count)
-        print (row)
+        change=int(row[1])-previous
+        if change > greatest_increase:
+            greatest_increase=change
+            greatest_increase_month=row[0]
+        if change < greatest_decrease:
+            greatest_decrease=change
+            greatest_decrease_month=row[0]
+        total_change=change+total_change
+        previous=int(row[1])
+
+    print('Total Months:', row_count)
+    print('Total: $', total_profit_loss)   
+    print('Average Change: $', round(total_change/(row_count-1),2))           
+    print(f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})')
+    print(f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})')
