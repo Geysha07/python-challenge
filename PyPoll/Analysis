@@ -1,0 +1,27 @@
+import os
+import csv
+
+PyPoll_csv=os.path.join('Resources', 'election_data.csv')
+print(PyPoll_csv)
+
+row_count=0
+Stockham_votes=0
+DeGette_votes=0
+Doane_votes=0
+
+with open(PyPoll_csv) as csvfile:
+    csvreader=csv.reader(csvfile,delimiter=',')
+    print(csvreader)
+
+    header = next(csvreader)
+    print(f"Header: {header}") 
+    
+    for row in csvreader:
+        row_count+=1
+        if row[2]=="Charles Casper Stockham":
+            Stockham_votes=Stockham_votes+1
+    print('Election Results')
+    print('----------------------------')
+    print('Total Votes:', row_count)
+    print('----------------------------')
+    print('Charles Casper Stockham',Stockham_votes)
