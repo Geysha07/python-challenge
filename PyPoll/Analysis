@@ -29,16 +29,14 @@ with open(PyPoll_csv) as csvfile:
             DeGette_votes=DeGette_votes+1
         if row[2]=="Raymon Anthony Doane":
             Doane_votes=Doane_votes+1
+        if row[2] not in list(vote_count.keys()):
+            vote_count [row[2]]=1
+        else:
+            vote_count[row[2]]+=1
     Stockham_percent=((Stockham_votes/row_count)*100)
     DeGette_percent=((DeGette_votes/row_count)*100)
     Doane_percent=((Doane_votes/row_count)*100)
 
-    for candidates in candidates:
-        if candidates in vote_count:
-            vote_count[candidates]+=1
-        else:
-            vote_count[candidates]=1
-    
     for candidates, count in vote_count.items():
         if count > max_count:
             max_count=count
@@ -53,5 +51,12 @@ with open(PyPoll_csv) as csvfile:
     print(f'Diana DeGette: {DeGette_percent:.2f}% ({DeGette_votes})')
     print(f'Raymon Anthony Doane: {Doane_percent:.2f}% ({Doane_votes})')
     print('----------------------------')
-    print('Winner:',winner)
+    print('Winner:',winner, max_count)
     print('----------------------------')
+    print(vote_count)
+
+with open("PyPoll.txt", "w") as output: 
+    Votes=(f'Election Results\n'
+           f'----------------------------\n'
+         )  
+    output.write(Votes)
