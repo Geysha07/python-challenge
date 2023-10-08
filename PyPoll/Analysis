@@ -20,8 +20,22 @@ with open(PyPoll_csv) as csvfile:
         row_count+=1
         if row[2]=="Charles Casper Stockham":
             Stockham_votes=Stockham_votes+1
+        if row[2]=="Diana DeGette":
+            DeGette_votes=DeGette_votes+1
+        if row[2]=="Raymon Anthony Doane":
+            Doane_votes=Doane_votes+1
+    Stockham_percent=((Stockham_votes/row_count)*100)
+    DeGette_percent=((DeGette_votes/row_count)*100)
+    Doane_percent=((Doane_votes/row_count)*100)
+
+    
     print('Election Results')
     print('----------------------------')
     print('Total Votes:', row_count)
     print('----------------------------')
-    print('Charles Casper Stockham',Stockham_votes)
+    print('Charles Casper Stockham: ',Stockham_percent,'%',Stockham_votes)
+    print('Diana DeGette',DeGette_percent, '%',DeGette_votes)
+    print('Raymon Anthony Doane',Doane_percent, '%',Doane_votes)
+    print('----------------------------')
+    print('Winner:')
+    print('----------------------------')
