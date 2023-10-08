@@ -53,10 +53,16 @@ with open(PyPoll_csv) as csvfile:
     print('----------------------------')
     print('Winner:',winner, max_count)
     print('----------------------------')
-    print(vote_count)
 
 with open("PyPoll.txt", "w") as output: 
     Votes=(f'Election Results\n'
            f'----------------------------\n'
-         )  
+           f'Total Votes:' + str(row_count) + "\n"
+           f'----------------------------\n'
+           f'Charles Casper Stockham: {Stockham_percent:.2f}% ({Stockham_votes})\n'
+           f'Diana DeGette: {DeGette_percent:.2f}% ({DeGette_votes})\n'
+           f'Raymon Anthony Doane: {Doane_percent:.2f}% ({Doane_votes})\n'
+           f'----------------------------\n'
+           f'Winner: ' + str(winner) +  '(' + str(max_count) + ')' + "\n"
+           f'----------------------------\n' )
     output.write(Votes)
