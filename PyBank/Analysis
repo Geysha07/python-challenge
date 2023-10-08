@@ -1,10 +1,13 @@
 import os
 import csv
 
-csvpath=os.path.join('Resources', 'budget_data.csv')
-print(csvpath)
+PyBank_csv=os.path.join('Resources', 'budget_data.csv')
+print(PyBank_csv)
 
-with open(csvpath) as csvfile:
+row_count=0
+
+
+with open(PyBank_csv) as csvfile:
     csvreader=csv.reader(csvfile,delimiter=',')
     print(csvreader)
 
@@ -13,4 +16,6 @@ with open(csvpath) as csvfile:
     for row in csvreader:
         print('Financial Analysis')
         print('----------------------------')
-        print(row)
+        row_count+=1
+        print('Total Months:', row_count)
+        print (row)
