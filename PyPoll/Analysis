@@ -1,9 +1,12 @@
+#Import os and csv module.
 import os
 import csv
 
+#Combine 'Resources' and 'election_data.csv' folders into one single path. 
 PyPoll_csv=os.path.join('Resources', 'election_data.csv')
 print(PyPoll_csv)
 
+#Set variables
 candidates=["Charles Casper Stockham", "Diana DeGette", "Raymon Anthony Doane"]
 winner= ""
 max_count=0
@@ -14,35 +17,52 @@ Stockham_votes=0
 DeGette_votes=0
 Doane_votes=0
 
+#Open CSV file and read lines.
 with open(PyPoll_csv) as csvfile:
     csvreader=csv.reader(csvfile,delimiter=',')
     print(csvreader)
 
+#Print the header in CSV file
     header = next(csvreader)
     print(f"Header: {header}") 
-    
+
+#For each row in the CSV file, row count is equal to the previous row + 1.    
     for row in csvreader:
         row_count+=1
+ 
+ #If the value in row 2 is equal to "Charles Casper Stockham", then add 1 to the total votes for Stockham.
         if row[2]=="Charles Casper Stockham":
             Stockham_votes=Stockham_votes+1
+        
+#If the value in row 2 is equal to "Diana DeGette", then add 1 to the total votes for DeGette.
         if row[2]=="Diana DeGette":
             DeGette_votes=DeGette_votes+1
+       
+#If the value in row 2 is equal to "Raymon Anthony Doane", then add 1 to the total votes for Doane.
         if row[2]=="Raymon Anthony Doane":
             Doane_votes=Doane_votes+1
+        
+#If the value in row 2 is not in the vote count list, then vote count of row 2 is equal to 1.
         if row[2] not in list(vote_count.keys()):
             vote_count [row[2]]=1
+        
+#Vote count is equal to vote count plus 1.
         else:
             vote_count[row[2]]+=1
+    
+#Calculate the percentages of votes for each candidate and then convert them to percentages.
     Stockham_percent=((Stockham_votes/row_count)*100)
     DeGette_percent=((DeGette_votes/row_count)*100)
     Doane_percent=((Doane_votes/row_count)*100)
 
+#For each candidate in the vote count list, if their count is greater than the maximum count, 
+# then their count becomes the maximum count and they are selected as winner.
     for candidates, count in vote_count.items():
         if count > max_count:
             max_count=count
             winner=candidates
 
-    
+#Print the information that we need
     print('Election Results')
     print('----------------------------')
     print('Total Votes:', row_count)
@@ -54,6 +74,7 @@ with open(PyPoll_csv) as csvfile:
     print('Winner:',winner, max_count)
     print('----------------------------')
 
+#Create a text file with the information we need
 with open("PyPoll.txt", "w") as output: 
     Votes=(f'Election Results\n'
            f'----------------------------\n'
